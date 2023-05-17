@@ -5,7 +5,10 @@ import apiRouter from "./routes";
 
 const app = express();
 
+//parses incoming request body to JSON
+//attatches JSON to body parameter of the req object
 app.use(express.json());
+
 app.use(morgan("common"));
 
 // TODO: use the imported router to handle all requests

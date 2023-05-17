@@ -30,7 +30,6 @@ router.get("/:id?", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
     try {
         let newUser = req.body;
-        console.log(newUser)
         const { firstName, lastName, role } = newUser;
         console.log(firstName, lastName, role);
         let data = await db.add(newUser);
