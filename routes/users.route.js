@@ -30,8 +30,6 @@ router.get("/:id?", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
     try {
         let newUser = req.body;
-        const { firstName, lastName, role } = newUser;
-        console.log(firstName, lastName, role);
         let data = await db.add(newUser);
         res.json(data);
         
@@ -43,9 +41,12 @@ router.post("/", async (req, res, next) => {
 // update existing user
 // updated user data is sent with request body
 // user to be updated is id url parameter
-router.put("/:id", (req, res, next) => {
+router.put("/:id", async (req, res, next) => {
     try {
-        // get user data and respond
+        const { id  } = req.params;
+        let updatedUser = req.body;
+        let data = await db.update(id, updatedUser);
+        res.json(data);
     } catch (error) {
         next(error);
     }
@@ -53,9 +54,11 @@ router.put("/:id", (req, res, next) => {
 
 // delete existing user
 // user to be deleted is id url parameter
-router.delete("/:id", (req, res, next) => {
+router.delete("/:id", async (req, res, next) => {
     try {
-        // get user data and respond
+        const { id } = req.params;
+        let data = await db.remove(id);
+        res.json(data);
     } catch (error) {
         next(error);
     }
