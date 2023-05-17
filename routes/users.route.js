@@ -27,9 +27,15 @@ router.get("/:id?", async (req, res, next) => {
 
 // create new user
 // new user data is sent with request body
-router.post("/", (req, res, next) => {
+router.post("/", async (req, res, next) => {
     try {
-        // create user data and respond
+        let newUser = req.body;
+        console.log(newUser)
+        const { firstName, lastName, role } = newUser;
+        console.log(firstName, lastName, role);
+        let data = await db.add(newUser);
+        res.json(data);
+        
     } catch (error) {
         next(error);
     }
@@ -55,3 +61,5 @@ router.delete("/:id", (req, res, next) => {
         next(error);
     }
 });
+
+export default router;
