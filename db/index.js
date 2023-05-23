@@ -3,9 +3,4 @@ import config from "../config";
 
 const connection = mysql2.createPool(config.mysql);
 
-
-
-
-
-
 export default connection;
